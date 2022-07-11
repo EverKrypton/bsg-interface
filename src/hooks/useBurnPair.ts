@@ -1,4 +1,4 @@
-import { Percent } from '@roimaswap/sdk';
+import { Percent } from '@babysquidgrow/sdk';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

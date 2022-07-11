@@ -1,5 +1,5 @@
 import { isAddress } from '@ethersproject/address';
-import { Currency, NativeCurrency } from '@roimaswap/sdk';
+import { Currency, NativeCurrency } from '@babysquidgrow/sdk';
 import { Modal, ModalContent, ModalFooter, ModalTitle } from '@mattjennings/react-modal';
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { FiList } from 'react-icons/fi';

@@ -1,4 +1,4 @@
-import { SupportedChainId } from '@roimaswap/sdk';
+import { SupportedChainId } from '@babysquidgrow/sdk';
 import { FiArrowRight } from 'react-icons/fi';
 import { useNavigate } from 'react-router';
 import { Button, Flex, Heading, Text } from 'theme-ui';

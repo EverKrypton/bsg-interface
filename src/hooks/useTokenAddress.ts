@@ -1,4 +1,4 @@
-import { Currency } from '@roimaswap/sdk';
+import { Currency } from '@babysquidgrow/sdk';
 import { useMemo } from 'react';
 
 import { ExtendedNative, isNativeCurrency } from '../constants/extended-native';

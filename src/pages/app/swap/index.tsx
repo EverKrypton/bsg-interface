@@ -1,4 +1,4 @@
-import { JSBI } from '@roimaswap/sdk';
+import { JSBI } from '@babysquidgrow/sdk';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiArrowLeft, FiSettings } from 'react-icons/fi';

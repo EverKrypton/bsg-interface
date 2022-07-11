@@ -1,4 +1,4 @@
-import { Currency } from '@roimaswap/sdk';
+import { Currency } from '@babysquidgrow/sdk';
 import { Flex } from 'theme-ui';
 
 import { Props as LogoProps } from './logo';

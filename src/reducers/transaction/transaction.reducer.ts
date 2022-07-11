@@ -1,4 +1,4 @@
-import { SupportedChainId } from '@roimaswap/sdk';
+import { SupportedChainId } from '@babysquidgrow/sdk';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '../types';

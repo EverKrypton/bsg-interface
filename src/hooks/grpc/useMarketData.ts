@@ -1,4 +1,4 @@
-import { Token } from '@roimaswap/sdk';
+import { Token } from '@babysquidgrow/sdk';
 import { useEffect, useState } from 'react';
 
 export default function useMarketData() {

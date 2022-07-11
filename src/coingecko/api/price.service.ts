@@ -7,7 +7,7 @@ import { includesAddress } from 'src/utils/addresses.js';
 import { retryPromiseWithDelay } from 'src/utils/promise.js';
 import { CoingeckoClient } from '../coingecko.client.js';
 import { CoingeckoService, getNativeAssetId, getPlatformId } from '../coingecko.service.js';
-import { SupportedChainId } from '@roimaswap/sdk';
+import { SupportedChainId } from '@babysquidgrow/sdk';
 
 /**
  * TYPES

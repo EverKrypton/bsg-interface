@@ -1,5 +1,5 @@
 import { ApolloClient, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
-import { SupportedChainId } from '@roimaswap/sdk';
+import { SupportedChainId } from '@babysquidgrow/sdk';
 
 export default function getClients(chainId?: number): {
   blockClient?: ApolloClient<NormalizedCacheObject>;

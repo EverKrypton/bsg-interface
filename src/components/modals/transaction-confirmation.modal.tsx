@@ -1,4 +1,4 @@
-import { Currency, Trade, TradeType } from '@roimaswap/sdk';
+import { Currency, Trade, TradeType } from '@babysquidgrow/sdk';
 import { Modal, ModalContent, ModalTitle } from '@mattjennings/react-modal';
 import { useCallback, useEffect } from 'react';
 import toast from 'react-hot-toast';

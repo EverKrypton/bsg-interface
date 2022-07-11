@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Pair, Trade, TradeType } from '@roimaswap/sdk';
+import { Currency, CurrencyAmount, Pair, Trade, TradeType } from '@babysquidgrow/sdk';
 import { useMemo } from 'react';
 
 import { BETTER_TRADE_LESS_HOPS_THRESHOLD } from '../constants';

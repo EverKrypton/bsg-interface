@@ -5,10 +5,10 @@ import {
   MULTICALL2_ADDRESS,
   ROUTER_ADDRESS,
   SupportedChainId,
-} from '@roimaswap/sdk';
-import FACTORY_ABI from '@roimaswap/sdk/abis/IUniswapV2Factory.json';
-import PAIR_ABI from '@roimaswap/sdk/abis/IUniswapV2Pair.json';
-import ROUTER_ABI from '@roimaswap/sdk/abis/IUniswapV2Router02.json';
+} from '@babysquidgrow/sdk';
+import FACTORY_ABI from '@babysquidgrow/sdk/abis/IUniswapV2Factory.json';
+import PAIR_ABI from '@babysquidgrow/sdk/abis/IUniswapV2Pair.json';
+import ROUTER_ABI from '@babysquidgrow/sdk/abis/IUniswapV2Router02.json';
 import { useMemo } from 'react';
 
 import { ARGENT_WALLET_DETECTOR_MAINNET_ADDRESS } from '../abis/argent-wallet-detector';

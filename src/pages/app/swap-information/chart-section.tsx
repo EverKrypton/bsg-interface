@@ -1,4 +1,4 @@
-import { Currency } from '@roimaswap/sdk';
+import { Currency } from '@babysquidgrow/sdk';
 import dayjs from 'dayjs';
 import last from 'lodash/last';
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';

@@ -1,4 +1,4 @@
-import { Token } from '@roimaswap/sdk';
+import { Token } from '@babysquidgrow/sdk';
 import { Flex, FlexProps, Text } from 'theme-ui';
 
 import TokenLogo from '../logos/token.logo';

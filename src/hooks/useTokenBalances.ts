@@ -1,4 +1,4 @@
-import { CurrencyAmount, Token } from '@roimaswap/sdk';
+import { CurrencyAmount, Token } from '@babysquidgrow/sdk';
 
 import { useTokenBalancesWithLoadingIndicator } from './useTokenBalancesWithLoadingIndicator';
 

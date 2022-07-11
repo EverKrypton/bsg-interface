@@ -1,6 +1,6 @@
 import { Interface } from '@ethersproject/abi';
 import { isAddress } from '@ethersproject/address';
-import { CurrencyAmount, JSBI, Token } from '@roimaswap/sdk';
+import { CurrencyAmount, JSBI, Token } from '@babysquidgrow/sdk';
 import { useMemo } from 'react';
 
 import ERC20ABI from '../abis/erc20.json';

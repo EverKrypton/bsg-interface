@@ -1,4 +1,4 @@
-import { Pair } from '@roimaswap/sdk';
+import { Pair } from '@babysquidgrow/sdk';
 import { useCallback, useMemo } from 'react';
 import { FiDownload, FiPlus } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';

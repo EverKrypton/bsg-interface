@@ -1,4 +1,4 @@
-import { Currency, NativeCurrency, SupportedChainId, Token, WETH9, WMATIC } from '@roimaswap/sdk';
+import { Currency, NativeCurrency, SupportedChainId, Token, WETH9, WMATIC } from '@babysquidgrow/sdk';
 
 export const WETH9_EXTENDED: { [chainId: number]: Token } = {
   ...WETH9,

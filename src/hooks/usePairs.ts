@@ -1,6 +1,6 @@
 import { Interface } from '@ethersproject/abi';
-import { computePairAddress, Currency, CurrencyAmount, FACTORY_ADDRESS, Pair } from '@roimaswap/sdk';
-import IUniswapV2PairABI from '@roimaswap/sdk/abis/IUniswapV2Pair.json';
+import { computePairAddress, Currency, CurrencyAmount, FACTORY_ADDRESS, Pair } from '@babysquidgrow/sdk';
+import IUniswapV2PairABI from '@babysquidgrow/sdk/abis/IUniswapV2Pair.json';
 import { useMemo } from 'react';
 
 import useActiveWeb3React from './useActiveWeb3React';

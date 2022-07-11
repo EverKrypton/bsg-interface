@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Token } from '@roimaswap/sdk';
+import { Token } from '@babysquidgrow/sdk';
 import { formatResult, formatMarketData } from '../../../coingecko/formatresult';
 import { numberToString } from '../../../utils/strings';
 import { CoinInfo } from '../../../Model/coin';

@@ -1,4 +1,4 @@
-import { Currency } from '@roimaswap/sdk';
+import { Currency } from '@babysquidgrow/sdk';
 import { FocusEvent, FocusEventHandler, MouseEvent, MouseEventHandler, useCallback } from 'react';
 import { useMemo } from 'react';
 import { useState } from 'react';

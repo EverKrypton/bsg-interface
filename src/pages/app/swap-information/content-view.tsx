@@ -1,4 +1,4 @@
-import { Currency } from '@roimaswap/sdk';
+import { Currency } from '@babysquidgrow/sdk';
 import { useMemo, useState } from 'react';
 import { Flex, FlexProps, Grid, Heading, ThemeUIStyleObject } from 'theme-ui';
 

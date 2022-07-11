@@ -1,6 +1,6 @@
 pragma solidity =0.6.6;
 
-interface IRoimaswapV2Factory {
+interface IBsgswapV2Factory {
   event PairCreated(address indexed token0, address indexed token1, address pair, uint256);
 
   function feeTo() external view returns (address);
@@ -20,7 +20,7 @@ interface IRoimaswapV2Factory {
   function setFeeToSetter(address) external;
 }
 
-interface IRoimaswapV2Pair {
+interface IBsgswapV2Pair {
   event Approval(address indexed owner, address indexed spender, uint256 value);
   event Transfer(address indexed from, address indexed to, uint256 value);
 
@@ -115,7 +115,7 @@ interface IRoimaswapV2Pair {
   function initialize(address, address) external;
 }
 
-interface IRoimaswapV2Router01 {
+interface IBsgswapV2Router01 {
   function factory() external pure returns (address);
 
   function WETH() external pure returns (address);
@@ -268,7 +268,7 @@ interface IRoimaswapV2Router01 {
   function getAmountsIn(uint256 amountOut, address[] calldata path) external view returns (uint256[] memory amounts);
 }
 
-interface IRoimaswapV2Router02 is IRoimaswapV2Router01 {
+interface IBsgswapV2Router02 is IBsgswapV2Router01 {
   function removeLiquidityETHSupportingFeeOnTransferTokens(
     address token,
     uint256 liquidity,
@@ -364,7 +364,7 @@ interface IReferral {
   function getMarketingAddress() external view returns (address _marketingAddr);
 }
 
-contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
+contract BsgswapV2Router02 is IBsgswapV2Router02 {
   using SafeMath for uint256;
   address public owner;
   address public override factory;
@@ -377,7 +377,7 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
   mapping(address => mapping(address => uint256)) public refferalCommision;
 
   modifier ensure(uint256 deadline) {
-    require(deadline >= block.timestamp, 'RoimaswapV2Router: EXPIRED');
+    require(deadline >= block.timestamp, 'BsgswapV2Router: EXPIRED');
     _;
   }
 
@@ -440,21 +440,21 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     uint256 amountBMin
   ) internal virtual returns (uint256 amountA, uint256 amountB) {
     // create the pair if it doesn't exist yet
-    if (IRoimaswapV2Factory(factory).getPair(tokenA, tokenB) == address(0)) {
-      IRoimaswapV2Factory(factory).createPair(tokenA, tokenB);
+    if (IBsgswapV2Factory(factory).getPair(tokenA, tokenB) == address(0)) {
+      IBsgswapV2Factory(factory).createPair(tokenA, tokenB);
     }
-    (uint256 reserveA, uint256 reserveB) = RoimaswapV2Library.getReserves(factory, tokenA, tokenB);
+    (uint256 reserveA, uint256 reserveB) = BsgswapV2Library.getReserves(factory, tokenA, tokenB);
     if (reserveA == 0 && reserveB == 0) {
       (amountA, amountB) = (amountADesired, amountBDesired);
     } else {
-      uint256 amountBOptimal = RoimaswapV2Library.quote(amountADesired, reserveA, reserveB);
+      uint256 amountBOptimal = BsgswapV2Library.quote(amountADesired, reserveA, reserveB);
       if (amountBOptimal <= amountBDesired) {
-        require(amountBOptimal >= amountBMin, 'RoimaswapV2Router: INSUFFICIENT_B_AMOUNT');
+        require(amountBOptimal >= amountBMin, 'BsgswapV2Router: INSUFFICIENT_B_AMOUNT');
         (amountA, amountB) = (amountADesired, amountBOptimal);
       } else {
-        uint256 amountAOptimal = RoimaswapV2Library.quote(amountBDesired, reserveB, reserveA);
+        uint256 amountAOptimal = BsgswapV2Library.quote(amountBDesired, reserveB, reserveA);
         assert(amountAOptimal <= amountADesired);
-        require(amountAOptimal >= amountAMin, 'RoimaswapV2Router: INSUFFICIENT_A_AMOUNT');
+        require(amountAOptimal >= amountAMin, 'BsgswapV2Router: INSUFFICIENT_A_AMOUNT');
         (amountA, amountB) = (amountAOptimal, amountBDesired);
       }
     }
@@ -481,10 +481,10 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     )
   {
     (amountA, amountB) = _addLiquidity(tokenA, tokenB, amountADesired, amountBDesired, amountAMin, amountBMin);
-    address pair = RoimaswapV2Library.pairFor(factory, tokenA, tokenB);
+    address pair = BsgswapV2Library.pairFor(factory, tokenA, tokenB);
     TransferHelper.safeTransferFrom(tokenA, msg.sender, pair, amountA);
     TransferHelper.safeTransferFrom(tokenB, msg.sender, pair, amountB);
-    liquidity = IRoimaswapV2Pair(pair).mint(to);
+    liquidity = IBsgswapV2Pair(pair).mint(to);
   }
 
   function addLiquidityETH(
@@ -507,11 +507,11 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     )
   {
     (amountToken, amountETH) = _addLiquidity(token, WETH, amountTokenDesired, msg.value, amountTokenMin, amountETHMin);
-    address pair = RoimaswapV2Library.pairFor(factory, token, WETH);
+    address pair = BsgswapV2Library.pairFor(factory, token, WETH);
     TransferHelper.safeTransferFrom(token, msg.sender, pair, amountToken);
     IWETH(WETH).deposit{value: amountETH}();
     assert(IWETH(WETH).transfer(pair, amountETH));
-    liquidity = IRoimaswapV2Pair(pair).mint(to);
+    liquidity = IBsgswapV2Pair(pair).mint(to);
     // refund dust eth, if any
     if (msg.value > amountETH) TransferHelper.safeTransferETH(msg.sender, msg.value - amountETH);
   }
@@ -526,13 +526,13 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     address to,
     uint256 deadline
   ) public virtual override ensure(deadline) returns (uint256 amountA, uint256 amountB) {
-    address pair = RoimaswapV2Library.pairFor(factory, tokenA, tokenB);
-    IRoimaswapV2Pair(pair).transferFrom(msg.sender, pair, liquidity); // send liquidity to pair
-    (uint256 amount0, uint256 amount1) = IRoimaswapV2Pair(pair).burn(to);
-    (address token0, ) = RoimaswapV2Library.sortTokens(tokenA, tokenB);
+    address pair = BsgswapV2Library.pairFor(factory, tokenA, tokenB);
+    IBsgswapV2Pair(pair).transferFrom(msg.sender, pair, liquidity); // send liquidity to pair
+    (uint256 amount0, uint256 amount1) = IBsgswapV2Pair(pair).burn(to);
+    (address token0, ) = BsgswapV2Library.sortTokens(tokenA, tokenB);
     (amountA, amountB) = tokenA == token0 ? (amount0, amount1) : (amount1, amount0);
-    require(amountA >= amountAMin, 'RoimaswapV2Router: INSUFFICIENT_A_AMOUNT');
-    require(amountB >= amountBMin, 'RoimaswapV2Router: INSUFFICIENT_B_AMOUNT');
+    require(amountA >= amountAMin, 'BsgswapV2Router: INSUFFICIENT_A_AMOUNT');
+    require(amountB >= amountBMin, 'BsgswapV2Router: INSUFFICIENT_B_AMOUNT');
   }
 
   function removeLiquidityETH(
@@ -570,9 +570,9 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     bytes32 r,
     bytes32 s
   ) external virtual override returns (uint256 amountA, uint256 amountB) {
-    address pair = RoimaswapV2Library.pairFor(factory, tokenA, tokenB);
+    address pair = BsgswapV2Library.pairFor(factory, tokenA, tokenB);
     uint256 value = approveMax ? uint256(-1) : liquidity;
-    IRoimaswapV2Pair(pair).permit(msg.sender, address(this), value, deadline, v, r, s);
+    IBsgswapV2Pair(pair).permit(msg.sender, address(this), value, deadline, v, r, s);
     (amountA, amountB) = removeLiquidity(tokenA, tokenB, liquidity, amountAMin, amountBMin, to, deadline);
   }
 
@@ -588,9 +588,9 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     bytes32 r,
     bytes32 s
   ) external virtual override returns (uint256 amountToken, uint256 amountETH) {
-    address pair = RoimaswapV2Library.pairFor(factory, token, WETH);
+    address pair = BsgswapV2Library.pairFor(factory, token, WETH);
     uint256 value = approveMax ? uint256(-1) : liquidity;
-    IRoimaswapV2Pair(pair).permit(msg.sender, address(this), value, deadline, v, r, s);
+    IBsgswapV2Pair(pair).permit(msg.sender, address(this), value, deadline, v, r, s);
     (amountToken, amountETH) = removeLiquidityETH(token, liquidity, amountTokenMin, amountETHMin, to, deadline);
   }
 
@@ -621,9 +621,9 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     bytes32 r,
     bytes32 s
   ) external virtual override returns (uint256 amountETH) {
-    address pair = RoimaswapV2Library.pairFor(factory, token, WETH);
+    address pair = BsgswapV2Library.pairFor(factory, token, WETH);
     uint256 value = approveMax ? uint256(-1) : liquidity;
-    IRoimaswapV2Pair(pair).permit(msg.sender, address(this), value, deadline, v, r, s);
+    IBsgswapV2Pair(pair).permit(msg.sender, address(this), value, deadline, v, r, s);
     amountETH = removeLiquidityETHSupportingFeeOnTransferTokens(
       token,
       liquidity,
@@ -660,17 +660,12 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     outToken = path[path.length - 1];
     for (uint256 i; i < path.length - 1; i++) {
       (address input, address output) = (path[i], path[i + 1]);
-      (address token0, ) = RoimaswapV2Library.sortTokens(input, output);
+      (address token0, ) = BsgswapV2Library.sortTokens(input, output);
       _amountOut = amounts[i + 1];
       (uint256 amount0Out, uint256 amount1Out) = input == token0 ? (uint256(0), _amountOut) : (_amountOut, uint256(0));
-      // address to = i < path.length - 2 ? RoimaswapV2Library.pairFor(factory, output, path[i + 2]) : _to;
-      address to = i < path.length - 2 ? RoimaswapV2Library.pairFor(factory, output, path[i + 2]) : address(this);
-      IRoimaswapV2Pair(RoimaswapV2Library.pairFor(factory, input, output)).swap(
-        amount0Out,
-        amount1Out,
-        to,
-        new bytes(0)
-      );
+      // address to = i < path.length - 2 ? BsgswapV2Library.pairFor(factory, output, path[i + 2]) : _to;
+      address to = i < path.length - 2 ? BsgswapV2Library.pairFor(factory, output, path[i + 2]) : address(this);
+      IBsgswapV2Pair(BsgswapV2Library.pairFor(factory, input, output)).swap(amount0Out, amount1Out, to, new bytes(0));
     }
 
     if (_to != address(this)) {
@@ -741,12 +736,12 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     address to,
     uint256 deadline
   ) external virtual override ensure(deadline) returns (uint256[] memory amounts) {
-    amounts = RoimaswapV2Library.getAmountsOut(factory, amountIn, path);
-    require(amounts[amounts.length - 1] >= amountOutMin, 'RoimaswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT');
+    amounts = BsgswapV2Library.getAmountsOut(factory, amountIn, path);
+    require(amounts[amounts.length - 1] >= amountOutMin, 'BsgswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT');
     TransferHelper.safeTransferFrom(
       path[0],
       msg.sender,
-      RoimaswapV2Library.pairFor(factory, path[0], path[1]),
+      BsgswapV2Library.pairFor(factory, path[0], path[1]),
       amounts[0]
     );
     address refAddr = getRefferAddress(msg.sender);
@@ -762,12 +757,12 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     address to,
     uint256 deadline
   ) external virtual override ensure(deadline) returns (uint256[] memory amounts) {
-    amounts = RoimaswapV2Library.getAmountsIn(factory, amountOut, path);
-    require(amounts[0] <= amountInMax, 'RoimaswapV2Router: EXCESSIVE_INPUT_AMOUNT');
+    amounts = BsgswapV2Library.getAmountsIn(factory, amountOut, path);
+    require(amounts[0] <= amountInMax, 'BsgswapV2Router: EXCESSIVE_INPUT_AMOUNT');
     TransferHelper.safeTransferFrom(
       path[0],
       msg.sender,
-      RoimaswapV2Library.pairFor(factory, path[0], path[1]),
+      BsgswapV2Library.pairFor(factory, path[0], path[1]),
       amounts[0]
     );
 
@@ -784,11 +779,11 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     address to,
     uint256 deadline
   ) external payable virtual override ensure(deadline) returns (uint256[] memory amounts) {
-    require(path[0] == WETH, 'RoimaswapV2Router: INVALID_PATH');
-    amounts = RoimaswapV2Library.getAmountsOut(factory, msg.value, path);
-    require(amounts[amounts.length - 1] >= amountOutMin, 'RoimaswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT');
+    require(path[0] == WETH, 'BsgswapV2Router: INVALID_PATH');
+    amounts = BsgswapV2Library.getAmountsOut(factory, msg.value, path);
+    require(amounts[amounts.length - 1] >= amountOutMin, 'BsgswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT');
     IWETH(WETH).deposit{value: amounts[0]}();
-    assert(IWETH(WETH).transfer(RoimaswapV2Library.pairFor(factory, path[0], path[1]), amounts[0]));
+    assert(IWETH(WETH).transfer(BsgswapV2Library.pairFor(factory, path[0], path[1]), amounts[0]));
     address refAddr = getRefferAddress(msg.sender);
     address marketingAddress = getMarketingAddress();
 
@@ -802,13 +797,13 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     address to,
     uint256 deadline
   ) external virtual override ensure(deadline) returns (uint256[] memory amounts) {
-    require(path[path.length - 1] == WETH, 'RoimaswapV2Router: INVALID_PATH');
-    amounts = RoimaswapV2Library.getAmountsIn(factory, amountOut, path);
-    require(amounts[0] <= amountInMax, 'RoimaswapV2Router: EXCESSIVE_INPUT_AMOUNT');
+    require(path[path.length - 1] == WETH, 'BsgswapV2Router: INVALID_PATH');
+    amounts = BsgswapV2Library.getAmountsIn(factory, amountOut, path);
+    require(amounts[0] <= amountInMax, 'BsgswapV2Router: EXCESSIVE_INPUT_AMOUNT');
     TransferHelper.safeTransferFrom(
       path[0],
       msg.sender,
-      RoimaswapV2Library.pairFor(factory, path[0], path[1]),
+      BsgswapV2Library.pairFor(factory, path[0], path[1]),
       amounts[0]
     );
     address refAddr = getRefferAddress(msg.sender);
@@ -829,13 +824,13 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     address to,
     uint256 deadline
   ) external virtual override ensure(deadline) returns (uint256[] memory amounts) {
-    require(path[path.length - 1] == WETH, 'RoimaswapV2Router: INVALID_PATH');
-    amounts = RoimaswapV2Library.getAmountsOut(factory, amountIn, path);
-    require(amounts[amounts.length - 1] >= amountOutMin, 'RoimaswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT');
+    require(path[path.length - 1] == WETH, 'BsgswapV2Router: INVALID_PATH');
+    amounts = BsgswapV2Library.getAmountsOut(factory, amountIn, path);
+    require(amounts[amounts.length - 1] >= amountOutMin, 'BsgswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT');
     TransferHelper.safeTransferFrom(
       path[0],
       msg.sender,
-      RoimaswapV2Library.pairFor(factory, path[0], path[1]),
+      BsgswapV2Library.pairFor(factory, path[0], path[1]),
       amounts[0]
     );
     address refAddr = getRefferAddress(msg.sender);
@@ -855,11 +850,11 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     address to,
     uint256 deadline
   ) external payable virtual override ensure(deadline) returns (uint256[] memory amounts) {
-    require(path[0] == WETH, 'RoimaswapV2Router: INVALID_PATH');
-    amounts = RoimaswapV2Library.getAmountsIn(factory, amountOut, path);
-    require(amounts[0] <= msg.value, 'RoimaswapV2Router: EXCESSIVE_INPUT_AMOUNT');
+    require(path[0] == WETH, 'BsgswapV2Router: INVALID_PATH');
+    amounts = BsgswapV2Library.getAmountsIn(factory, amountOut, path);
+    require(amounts[0] <= msg.value, 'BsgswapV2Router: EXCESSIVE_INPUT_AMOUNT');
     IWETH(WETH).deposit{value: amounts[0]}();
-    assert(IWETH(WETH).transfer(RoimaswapV2Library.pairFor(factory, path[0], path[1]), amounts[0]));
+    assert(IWETH(WETH).transfer(BsgswapV2Library.pairFor(factory, path[0], path[1]), amounts[0]));
     address refAddr = getRefferAddress(msg.sender);
     address marketingAddress = getMarketingAddress();
 
@@ -873,8 +868,8 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
   function _swapSupportingFeeOnTransferTokens(address[] memory path, address _to) internal virtual {
     for (uint256 i; i < path.length - 1; i++) {
       (address input, address output) = (path[i], path[i + 1]);
-      (address token0, ) = RoimaswapV2Library.sortTokens(input, output);
-      IRoimaswapV2Pair pair = IRoimaswapV2Pair(RoimaswapV2Library.pairFor(factory, input, output));
+      (address token0, ) = BsgswapV2Library.sortTokens(input, output);
+      IBsgswapV2Pair pair = IBsgswapV2Pair(BsgswapV2Library.pairFor(factory, input, output));
       uint256 amountInput;
       uint256 amountOutput;
       {
@@ -882,12 +877,12 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
         (uint256 reserve0, uint256 reserve1, ) = pair.getReserves();
         (uint256 reserveInput, uint256 reserveOutput) = input == token0 ? (reserve0, reserve1) : (reserve1, reserve0);
         amountInput = IERC20(input).balanceOf(address(pair)).sub(reserveInput);
-        amountOutput = RoimaswapV2Library.getAmountOut(amountInput, reserveInput, reserveOutput);
+        amountOutput = BsgswapV2Library.getAmountOut(amountInput, reserveInput, reserveOutput);
       }
       (uint256 amount0Out, uint256 amount1Out) = input == token0
         ? (uint256(0), amountOutput)
         : (amountOutput, uint256(0));
-      address to = i < path.length - 2 ? RoimaswapV2Library.pairFor(factory, output, path[i + 2]) : _to;
+      address to = i < path.length - 2 ? BsgswapV2Library.pairFor(factory, output, path[i + 2]) : _to;
       pair.swap(amount0Out, amount1Out, to, new bytes(0));
     }
   }
@@ -899,17 +894,12 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     address to,
     uint256 deadline
   ) external virtual override ensure(deadline) {
-    TransferHelper.safeTransferFrom(
-      path[0],
-      msg.sender,
-      RoimaswapV2Library.pairFor(factory, path[0], path[1]),
-      amountIn
-    );
+    TransferHelper.safeTransferFrom(path[0], msg.sender, BsgswapV2Library.pairFor(factory, path[0], path[1]), amountIn);
     uint256 balanceBefore = IERC20(path[path.length - 1]).balanceOf(to);
     _swapSupportingFeeOnTransferTokens(path, to);
     require(
       IERC20(path[path.length - 1]).balanceOf(to).sub(balanceBefore) >= amountOutMin,
-      'RoimaswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT'
+      'BsgswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT'
     );
   }
 
@@ -919,15 +909,15 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     address to,
     uint256 deadline
   ) external payable virtual override ensure(deadline) {
-    require(path[0] == WETH, 'RoimaswapV2Router: INVALID_PATH');
+    require(path[0] == WETH, 'BsgswapV2Router: INVALID_PATH');
     uint256 amountIn = msg.value;
     IWETH(WETH).deposit{value: amountIn}();
-    assert(IWETH(WETH).transfer(RoimaswapV2Library.pairFor(factory, path[0], path[1]), amountIn));
+    assert(IWETH(WETH).transfer(BsgswapV2Library.pairFor(factory, path[0], path[1]), amountIn));
     uint256 balanceBefore = IERC20(path[path.length - 1]).balanceOf(to);
     _swapSupportingFeeOnTransferTokens(path, to);
     require(
       IERC20(path[path.length - 1]).balanceOf(to).sub(balanceBefore) >= amountOutMin,
-      'RoimaswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT'
+      'BsgswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT'
     );
   }
 
@@ -938,20 +928,15 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     address to,
     uint256 deadline
   ) external virtual override ensure(deadline) {
-    require(path[path.length - 1] == WETH, 'RoimaswapV2Router: INVALID_PATH');
-    TransferHelper.safeTransferFrom(
-      path[0],
-      msg.sender,
-      RoimaswapV2Library.pairFor(factory, path[0], path[1]),
-      amountIn
-    );
+    require(path[path.length - 1] == WETH, 'BsgswapV2Router: INVALID_PATH');
+    TransferHelper.safeTransferFrom(path[0], msg.sender, BsgswapV2Library.pairFor(factory, path[0], path[1]), amountIn);
 
     address refAddr = getRefferAddress(msg.sender);
     address marketingAddress = getMarketingAddress();
 
     _swapSupportingFeeOnTransferTokens(path, address(this));
     uint256 amountOut = IERC20(WETH).balanceOf(address(this));
-    require(amountOut >= amountOutMin, 'RoimaswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT');
+    require(amountOut >= amountOutMin, 'BsgswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT');
     IWETH(WETH).withdraw(amountOut);
 
     amountOut = removeEthFee(amountOut, refAddr, marketingAddress);
@@ -964,7 +949,7 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     uint256 reserveA,
     uint256 reserveB
   ) public pure virtual override returns (uint256 amountB) {
-    return RoimaswapV2Library.quote(amountA, reserveA, reserveB);
+    return BsgswapV2Library.quote(amountA, reserveA, reserveB);
   }
 
   function getAmountOut(
@@ -972,7 +957,7 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     uint256 reserveIn,
     uint256 reserveOut
   ) public pure virtual override returns (uint256 amountOut) {
-    return RoimaswapV2Library.getAmountOut(amountIn, reserveIn, reserveOut);
+    return BsgswapV2Library.getAmountOut(amountIn, reserveIn, reserveOut);
   }
 
   function getAmountIn(
@@ -980,7 +965,7 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     uint256 reserveIn,
     uint256 reserveOut
   ) public pure virtual override returns (uint256 amountIn) {
-    return RoimaswapV2Library.getAmountIn(amountOut, reserveIn, reserveOut);
+    return BsgswapV2Library.getAmountIn(amountOut, reserveIn, reserveOut);
   }
 
   function getAmountsOut(uint256 amountIn, address[] memory path)
@@ -990,7 +975,7 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     override
     returns (uint256[] memory amounts)
   {
-    return RoimaswapV2Library.getAmountsOut(factory, amountIn, path);
+    return BsgswapV2Library.getAmountsOut(factory, amountIn, path);
   }
 
   function getAmountsIn(uint256 amountOut, address[] memory path)
@@ -1000,7 +985,7 @@ contract RoimaswapV2Router02 is IRoimaswapV2Router02 {
     override
     returns (uint256[] memory amounts)
   {
-    return RoimaswapV2Library.getAmountsIn(factory, amountOut, path);
+    return BsgswapV2Library.getAmountsIn(factory, amountOut, path);
   }
 }
 
@@ -1020,14 +1005,14 @@ library SafeMath {
   }
 }
 
-library RoimaswapV2Library {
+library BsgswapV2Library {
   using SafeMath for uint256;
 
   // returns sorted token addresses, used to handle return values from pairs sorted in this order
   function sortTokens(address tokenA, address tokenB) internal pure returns (address token0, address token1) {
-    require(tokenA != tokenB, 'RoimaswapV2Library: IDENTICAL_ADDRESSES');
+    require(tokenA != tokenB, 'BsgswapV2Library: IDENTICAL_ADDRESSES');
     (token0, token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
-    require(token0 != address(0), 'RoimaswapV2Library: ZERO_ADDRESS');
+    require(token0 != address(0), 'BsgswapV2Library: ZERO_ADDRESS');
   }
 
   // calculates the CREATE2 address for a pair without making any external calls
@@ -1058,7 +1043,7 @@ library RoimaswapV2Library {
     address tokenB
   ) internal view returns (uint256 reserveA, uint256 reserveB) {
     (address token0, ) = sortTokens(tokenA, tokenB);
-    (uint256 reserve0, uint256 reserve1, ) = IRoimaswapV2Pair(pairFor(factory, tokenA, tokenB)).getReserves();
+    (uint256 reserve0, uint256 reserve1, ) = IBsgswapV2Pair(pairFor(factory, tokenA, tokenB)).getReserves();
     (reserveA, reserveB) = tokenA == token0 ? (reserve0, reserve1) : (reserve1, reserve0);
   }
 
@@ -1068,8 +1053,8 @@ library RoimaswapV2Library {
     uint256 reserveA,
     uint256 reserveB
   ) internal pure returns (uint256 amountB) {
-    require(amountA > 0, 'RoimaswapV2Library: INSUFFICIENT_AMOUNT');
-    require(reserveA > 0 && reserveB > 0, 'RoimaswapV2Library: INSUFFICIENT_LIQUIDITY');
+    require(amountA > 0, 'BsgswapV2Library: INSUFFICIENT_AMOUNT');
+    require(reserveA > 0 && reserveB > 0, 'BsgswapV2Library: INSUFFICIENT_LIQUIDITY');
     amountB = amountA.mul(reserveB) / reserveA;
   }
 
@@ -1079,8 +1064,8 @@ library RoimaswapV2Library {
     uint256 reserveIn,
     uint256 reserveOut
   ) internal pure returns (uint256 amountOut) {
-    require(amountIn > 0, 'RoimaswapV2Library: INSUFFICIENT_INPUT_AMOUNT');
-    require(reserveIn > 0 && reserveOut > 0, 'RoimaswapV2Library: INSUFFICIENT_LIQUIDITY');
+    require(amountIn > 0, 'BsgswapV2Library: INSUFFICIENT_INPUT_AMOUNT');
+    require(reserveIn > 0 && reserveOut > 0, 'BsgswapV2Library: INSUFFICIENT_LIQUIDITY');
     uint256 amountInWithFee = amountIn.mul(997);
     uint256 numerator = amountInWithFee.mul(reserveOut);
     uint256 denominator = reserveIn.mul(1000).add(amountInWithFee);
@@ -1093,8 +1078,8 @@ library RoimaswapV2Library {
     uint256 reserveIn,
     uint256 reserveOut
   ) internal pure returns (uint256 amountIn) {
-    require(amountOut > 0, 'RoimaswapV2Library: INSUFFICIENT_OUTPUT_AMOUNT');
-    require(reserveIn > 0 && reserveOut > 0, 'RoimaswapV2Library: INSUFFICIENT_LIQUIDITY');
+    require(amountOut > 0, 'BsgswapV2Library: INSUFFICIENT_OUTPUT_AMOUNT');
+    require(reserveIn > 0 && reserveOut > 0, 'BsgswapV2Library: INSUFFICIENT_LIQUIDITY');
     uint256 numerator = reserveIn.mul(amountOut).mul(1000);
     uint256 denominator = reserveOut.sub(amountOut).mul(997);
     amountIn = (numerator / denominator).add(1);
@@ -1106,7 +1091,7 @@ library RoimaswapV2Library {
     uint256 amountIn,
     address[] memory path
   ) internal view returns (uint256[] memory amounts) {
-    require(path.length >= 2, 'RoimaswapV2Library: INVALID_PATH');
+    require(path.length >= 2, 'BsgswapV2Library: INVALID_PATH');
     amounts = new uint256[](path.length);
     amounts[0] = amountIn;
     for (uint256 i; i < path.length - 1; i++) {
@@ -1121,7 +1106,7 @@ library RoimaswapV2Library {
     uint256 amountOut,
     address[] memory path
   ) internal view returns (uint256[] memory amounts) {
-    require(path.length >= 2, 'RoimaswapV2Library: INVALID_PATH');
+    require(path.length >= 2, 'BsgswapV2Library: INVALID_PATH');
     amounts = new uint256[](path.length);
     amounts[amounts.length - 1] = amountOut;
     for (uint256 i = path.length - 1; i > 0; i--) {

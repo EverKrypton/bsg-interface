@@ -1,6 +1,6 @@
 import { arrayify } from '@ethersproject/bytes';
 import { parseBytes32String } from '@ethersproject/strings';
-import { Token } from '@roimaswap/sdk';
+import { Token } from '@babysquidgrow/sdk';
 import { useMemo } from 'react';
 
 import { parseAddress } from '../utils/addresses';

@@ -1,6 +1,6 @@
 import { isAddress } from '@ethersproject/address';
 import { BigNumber } from '@ethersproject/bignumber';
-import { Currency, Percent, Router, SwapParameters, Trade, TradeType } from '@roimaswap/sdk';
+import { Currency, Percent, Router, SwapParameters, Trade, TradeType } from '@babysquidgrow/sdk';
 import { useMemo } from 'react';
 
 import { calculateGasMargin } from '../functions/trade';

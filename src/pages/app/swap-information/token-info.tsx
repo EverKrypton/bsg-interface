@@ -1,4 +1,4 @@
-import { Currency } from '@roimaswap/sdk';
+import { Currency } from '@babysquidgrow/sdk';
 import numbro from 'numbro';
 import { useState } from 'react';
 import { FiArrowDown, FiInfo, FiArrowUp } from 'react-icons/fi';

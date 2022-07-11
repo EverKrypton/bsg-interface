@@ -1,4 +1,4 @@
-import { Currency } from '@roimaswap/sdk';
+import { Currency } from '@babysquidgrow/sdk';
 import { FiArrowRight, FiInfo } from 'react-icons/fi';
 import { useNavigate } from 'react-router';
 import { Button, Divider, Flex, FlexProps, Heading, IconButton, Text, ThemeUIStyleObject } from 'theme-ui';

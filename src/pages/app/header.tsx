@@ -62,7 +62,7 @@ export default function Header() {
           </Link>
           {
             <Text variant="caps101" sx={{ padding: 0 }}>
-              ROIMA SWAP
+              BSGSWAP
             </Text>
           }
           {!isUpToExtraSmall && (

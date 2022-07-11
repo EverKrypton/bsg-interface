@@ -1011,6 +1011,19 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
+"@babysquidgrow/sdk@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@babysquidgrow/sdk/-/sdk-1.6.0.tgz#05dbacc44182d593a41218387248aa34888e8048"
+  integrity sha512-MyeWXkFTVroqAATFdJHKAOpjj+aQ6mFL/oo8ZKZZDmYrv64mQB0fSO7pBQiSaSzxAzR+m2q+oJrZb44O7/8oCQ==
+  dependencies:
+    big.js "6.1.1"
+    decimal.js-light "2.5.1"
+    ethers "5.5.2"
+    jsbi "4.1.0"
+    tiny-invariant "1.2.0"
+    tiny-warning "1.0.3"
+    toformat "2.0.0"
+
 "@cspotcode/source-map-consumer@0.8.0":
   version "0.8.0"
   resolved "https://registry.npmjs.org/@cspotcode/source-map-consumer/-/source-map-consumer-0.8.0.tgz"
@@ -1644,19 +1657,6 @@
     redux "^4.1.2"
     redux-thunk "^2.4.1"
     reselect "^4.1.5"
-
-"@roimaswap/sdk@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@roimaswap/sdk/-/sdk-2.0.0.tgz#44c2779b7b8a9dba112f7e42943b204b3a50facf"
-  integrity sha512-21X0H0VD8dI7lQmekZxBtwCKhar3irfggNo6ri2NdtQkLdQZ1AePv6tSPFuHV4o+Dyodr2yShJfMiOBqIh7M/w==
-  dependencies:
-    big.js "6.1.1"
-    decimal.js-light "2.5.1"
-    ethers "5.5.2"
-    jsbi "4.1.0"
-    tiny-invariant "1.2.0"
-    tiny-warning "1.0.3"
-    toformat "2.0.0"
 
 "@rollup/plugin-babel@^5.2.0":
   version "5.3.0"

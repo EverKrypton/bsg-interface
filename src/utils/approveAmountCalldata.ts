@@ -1,5 +1,5 @@
 import { Interface } from '@ethersproject/abi';
-import { BigintIsh, Currency, CurrencyAmount, JSBI } from '@roimaswap/sdk';
+import { BigintIsh, Currency, CurrencyAmount, JSBI } from '@babysquidgrow/sdk';
 
 import { Erc20Interface } from '../abis/types/Erc20';
 

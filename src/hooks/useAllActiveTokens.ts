@@ -1,4 +1,4 @@
-import { Token } from '@roimaswap/sdk';
+import { Token } from '@babysquidgrow/sdk';
 import { useMemo } from 'react';
 
 import { utils } from '../constants/token';

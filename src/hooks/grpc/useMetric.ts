@@ -1,4 +1,4 @@
-import { Token } from '@roimaswap/sdk';
+import { Token } from '@babysquidgrow/sdk';
 import { useEffect, useState } from 'react';
 import { AsObject, FormatResult, coinMetrics } from '../../coingecko/formatresult';
 import { GetMetricRequest, GetMetricResponse } from '../../services/proto/CryptoInfo_pb';

@@ -49,7 +49,7 @@ export default function AppRouter() {
   return (
     <>
       <Helmet>
-        <title> Roimaswap | App</title>
+        <title> Bsgswap | App</title>
         <link rel="canonical" href="https://wingswap.com/#/app" />
       </Helmet>
 

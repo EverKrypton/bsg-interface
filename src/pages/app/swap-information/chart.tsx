@@ -1,4 +1,4 @@
-import { Currency } from '@roimaswap/sdk';
+import { Currency } from '@babysquidgrow/sdk';
 import OriginalApexCharts, { ApexOptions } from 'apexcharts';
 import dayjs from 'dayjs';
 import { useMemo, useState } from 'react';

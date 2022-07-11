@@ -1,4 +1,4 @@
-import { Currency, SupportedChainId } from '@roimaswap/sdk';
+import { Currency, SupportedChainId } from '@babysquidgrow/sdk';
 
 import EthereumLogo from '../../assets/images/tokens/ethereum-logo.png';
 import RoimaPng from '../../assets/images/tokens/roima-logo.png';

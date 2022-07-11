@@ -1,4 +1,4 @@
-import { Currency } from '@roimaswap/sdk';
+import { Currency } from '@babysquidgrow/sdk';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { Button, Flex, Heading, Text } from 'theme-ui';
 

@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount } from '@roimaswap/sdk';
+import { Currency, CurrencyAmount } from '@babysquidgrow/sdk';
 import { Modal, ModalContent, ModalFooter, ModalTitle } from '@mattjennings/react-modal';
 import { useCallback } from 'react';
 import { Button, Divider, Flex, Heading, Text } from 'theme-ui';

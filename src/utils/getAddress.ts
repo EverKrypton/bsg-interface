@@ -1,4 +1,4 @@
-import { Token } from '@roimaswap/sdk';
+import { Token } from '@babysquidgrow/sdk';
 
 import { parseAddress } from './addresses';
 

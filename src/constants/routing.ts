@@ -1,4 +1,4 @@
-import { SupportedChainId, Token } from '@roimaswap/sdk';
+import { SupportedChainId, Token } from '@babysquidgrow/sdk';
 
 import { ExtendedNative, WETH9_EXTENDED, WMATIC_EXTENDED } from './extended-native';
 import { DAI, USDC, USDT, WBTC, RMAI } from './token';

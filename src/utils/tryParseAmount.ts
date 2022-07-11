@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { parseUnits } from '@ethersproject/units';
-import { Currency, CurrencyAmount, JSBI } from '@roimaswap/sdk';
+import { Currency, CurrencyAmount, JSBI } from '@babysquidgrow/sdk';
 
 export const parseBalance = (value: string, decimals = 18): BigNumber => {
   return parseUnits(value || '0', decimals);

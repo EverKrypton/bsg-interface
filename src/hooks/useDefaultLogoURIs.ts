@@ -1,4 +1,4 @@
-import { Currency, NativeCurrency } from '@roimaswap/sdk';
+import { Currency, NativeCurrency } from '@babysquidgrow/sdk';
 import { useCallback, useMemo } from 'react';
 
 import { selectors } from '../reducers';

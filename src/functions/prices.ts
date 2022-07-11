@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, JSBI, Percent, Trade, TradeType } from '@roimaswap/sdk';
+import { Currency, CurrencyAmount, JSBI, Percent, Trade, TradeType } from '@babysquidgrow/sdk';
 
 import {
   ALLOWED_PRICE_IMPACT_HIGH,

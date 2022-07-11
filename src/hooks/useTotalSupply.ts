@@ -1,5 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber';
-import { Currency, CurrencyAmount, Token } from '@roimaswap/sdk';
+import { Currency, CurrencyAmount, Token } from '@babysquidgrow/sdk';
 
 import { useTokenContract } from './useContract';
 import useSingleCallResult from './web3/useSingleCallResult';

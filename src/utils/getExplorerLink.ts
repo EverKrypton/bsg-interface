@@ -1,4 +1,4 @@
-import { SupportedChainId } from '@roimaswap/sdk';
+import { SupportedChainId } from '@babysquidgrow/sdk';
 
 const ETHERSCAN_PREFIXES: { [chainId: number]: string } = {
   [SupportedChainId.MAINNET]: 'https://etherscan.io',

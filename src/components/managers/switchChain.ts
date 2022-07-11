@@ -1,5 +1,5 @@
-import { SupportedChainId } from '@roimaswap/sdk';
-// import { SupportedChainId } from "@roimaswap/sdk";
+import { SupportedChainId } from '@babysquidgrow/sdk';
+// import { SupportedChainId } from "@babysquidgrow/sdk";
 
 import { NETWORK_LABELS } from '../../constants/chains';
 

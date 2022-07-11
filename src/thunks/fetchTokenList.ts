@@ -1,4 +1,4 @@
-import { SupportedChainId } from '@roimaswap/sdk';
+import { SupportedChainId } from '@babysquidgrow/sdk';
 import {
   getVersionUpgrade,
   minVersionBump,

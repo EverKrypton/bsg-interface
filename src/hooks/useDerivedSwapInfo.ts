@@ -1,5 +1,5 @@
 import { getAddress, isAddress } from '@ethersproject/address';
-import { Currency, CurrencyAmount, Percent, Trade, TradeType } from '@roimaswap/sdk';
+import { Currency, CurrencyAmount, Percent, Trade, TradeType } from '@babysquidgrow/sdk';
 
 import { selectors } from '../reducers';
 import { useAppSelector } from '../reducers/hooks';

@@ -4,7 +4,7 @@
 
 pragma solidity =0.5.16;
 
-interface IRoimaswapV2Factory {
+interface IBsgswapV2Factory {
   event PairCreated(address indexed token0, address indexed token1, address pair, uint256);
 
   function feeTo() external view returns (address);
@@ -24,7 +24,7 @@ interface IRoimaswapV2Factory {
   function setFeeToSetter(address) external;
 }
 
-interface IRoimaswapV2Pair {
+interface IBsgswapV2Pair {
   event Approval(address indexed owner, address indexed spender, uint256 value);
   event Transfer(address indexed from, address indexed to, uint256 value);
 
@@ -119,7 +119,7 @@ interface IRoimaswapV2Pair {
   function initialize(address, address) external;
 }
 
-interface IRoimaswapV2ERC20 {
+interface IBsgswapV2ERC20 {
   event Approval(address indexed owner, address indexed spender, uint256 value);
   event Transfer(address indexed from, address indexed to, uint256 value);
 
@@ -189,8 +189,8 @@ interface IERC20 {
   ) external returns (bool);
 }
 
-interface IRoimaswapV2Callee {
-  function roimaswapV2Call(
+interface IBsgswapV2Callee {
+  function bsgswapV2Call(
     address sender,
     uint256 amount0,
     uint256 amount1,
@@ -198,10 +198,10 @@ interface IRoimaswapV2Callee {
   ) external;
 }
 
-contract RoimaswapV2ERC20 is IRoimaswapV2ERC20 {
+contract BsgswapV2ERC20 is IBsgswapV2ERC20 {
   using SafeMath for uint256;
 
-  string public constant name = 'Roimaswap V2';
+  string public constant name = 'Bsgswap V2';
   string public constant symbol = 'Rmai-V2';
   uint8 public constant decimals = 18;
   uint256 public totalSupply;
@@ -294,7 +294,7 @@ contract RoimaswapV2ERC20 is IRoimaswapV2ERC20 {
     bytes32 r,
     bytes32 s
   ) external {
-    require(deadline >= block.timestamp, 'RoimaswapV2: EXPIRED');
+    require(deadline >= block.timestamp, 'BsgswapV2: EXPIRED');
     bytes32 digest = keccak256(
       abi.encodePacked(
         '\x19\x01',
@@ -303,12 +303,12 @@ contract RoimaswapV2ERC20 is IRoimaswapV2ERC20 {
       )
     );
     address recoveredAddress = ecrecover(digest, v, r, s);
-    require(recoveredAddress != address(0) && recoveredAddress == owner, 'RoimaswapV2: INVALID_SIGNATURE');
+    require(recoveredAddress != address(0) && recoveredAddress == owner, 'BsgswapV2: INVALID_SIGNATURE');
     _approve(owner, spender, value);
   }
 }
 
-contract RoimaswapV2Pair is IRoimaswapV2Pair, RoimaswapV2ERC20 {
+contract BsgswapV2Pair is IBsgswapV2Pair, BsgswapV2ERC20 {
   using SafeMath for uint256;
   using UQ112x112 for uint224;
 
@@ -329,7 +329,7 @@ contract RoimaswapV2Pair is IRoimaswapV2Pair, RoimaswapV2ERC20 {
 
   uint256 private unlocked = 1;
   modifier lock() {
-    require(unlocked == 1, 'RoimaswapV2: LOCKED');
+    require(unlocked == 1, 'BsgswapV2: LOCKED');
     unlocked = 0;
     _;
     unlocked = 1;
@@ -355,7 +355,7 @@ contract RoimaswapV2Pair is IRoimaswapV2Pair, RoimaswapV2ERC20 {
     uint256 value
   ) private {
     (bool success, bytes memory data) = token.call(abi.encodeWithSelector(SELECTOR, to, value));
-    require(success && (data.length == 0 || abi.decode(data, (bool))), 'RoimaswapV2: TRANSFER_FAILED');
+    require(success && (data.length == 0 || abi.decode(data, (bool))), 'BsgswapV2: TRANSFER_FAILED');
   }
 
   event Mint(address indexed sender, uint256 amount0, uint256 amount1);
@@ -376,7 +376,7 @@ contract RoimaswapV2Pair is IRoimaswapV2Pair, RoimaswapV2ERC20 {
 
   // called once by the factory at time of deployment
   function initialize(address _token0, address _token1) external {
-    require(msg.sender == factory, 'RoimaswapV2: FORBIDDEN'); // sufficient check
+    require(msg.sender == factory, 'BsgswapV2: FORBIDDEN'); // sufficient check
     token0 = _token0;
     token1 = _token1;
   }
@@ -388,7 +388,7 @@ contract RoimaswapV2Pair is IRoimaswapV2Pair, RoimaswapV2ERC20 {
     uint112 _reserve0,
     uint112 _reserve1
   ) private {
-    require(balance0 <= uint112(-1) && balance1 <= uint112(-1), 'RoimaswapV2: OVERFLOW');
+    require(balance0 <= uint112(-1) && balance1 <= uint112(-1), 'BsgswapV2: OVERFLOW');
     uint32 blockTimestamp = uint32(block.timestamp % 2**32);
     uint32 timeElapsed = blockTimestamp - blockTimestampLast; // overflow is desired
     if (timeElapsed > 0 && _reserve0 != 0 && _reserve1 != 0) {
@@ -404,7 +404,7 @@ contract RoimaswapV2Pair is IRoimaswapV2Pair, RoimaswapV2ERC20 {
 
   // if fee is on, mint liquidity equivalent to 1/6th of the growth in sqrt(k)
   function _mintFee(uint112 _reserve0, uint112 _reserve1) private returns (bool feeOn) {
-    address feeTo = IRoimaswapV2Factory(factory).feeTo();
+    address feeTo = IBsgswapV2Factory(factory).feeTo();
     feeOn = feeTo != address(0);
     uint256 _kLast = kLast; // gas savings
     if (feeOn) {
@@ -439,7 +439,7 @@ contract RoimaswapV2Pair is IRoimaswapV2Pair, RoimaswapV2ERC20 {
     } else {
       liquidity = Math.min(amount0.mul(_totalSupply) / _reserve0, amount1.mul(_totalSupply) / _reserve1);
     }
-    require(liquidity > 0, 'RoimaswapV2: INSUFFICIENT_LIQUIDITY_MINTED');
+    require(liquidity > 0, 'BsgswapV2: INSUFFICIENT_LIQUIDITY_MINTED');
     _mint(to, liquidity);
 
     _update(balance0, balance1, _reserve0, _reserve1);
@@ -460,7 +460,7 @@ contract RoimaswapV2Pair is IRoimaswapV2Pair, RoimaswapV2ERC20 {
     uint256 _totalSupply = totalSupply; // gas savings, must be defined here since totalSupply can update in _mintFee
     amount0 = liquidity.mul(balance0) / _totalSupply; // using balances ensures pro-rata distribution
     amount1 = liquidity.mul(balance1) / _totalSupply; // using balances ensures pro-rata distribution
-    require(amount0 > 0 && amount1 > 0, 'RoimaswapV2: INSUFFICIENT_LIQUIDITY_BURNED');
+    require(amount0 > 0 && amount1 > 0, 'BsgswapV2: INSUFFICIENT_LIQUIDITY_BURNED');
     _burn(address(this), liquidity);
     _safeTransfer(_token0, to, amount0);
     _safeTransfer(_token1, to, amount1);
@@ -479,9 +479,9 @@ contract RoimaswapV2Pair is IRoimaswapV2Pair, RoimaswapV2ERC20 {
     address to,
     bytes calldata data
   ) external lock {
-    require(amount0Out > 0 || amount1Out > 0, 'RoimaswapV2: INSUFFICIENT_OUTPUT_AMOUNT');
+    require(amount0Out > 0 || amount1Out > 0, 'BsgswapV2: INSUFFICIENT_OUTPUT_AMOUNT');
     (uint112 _reserve0, uint112 _reserve1, ) = getReserves(); // gas savings
-    require(amount0Out < _reserve0 && amount1Out < _reserve1, 'RoimaswapV2: INSUFFICIENT_LIQUIDITY');
+    require(amount0Out < _reserve0 && amount1Out < _reserve1, 'BsgswapV2: INSUFFICIENT_LIQUIDITY');
 
     uint256 balance0;
     uint256 balance1;
@@ -489,24 +489,21 @@ contract RoimaswapV2Pair is IRoimaswapV2Pair, RoimaswapV2ERC20 {
       // scope for _token{0,1}, avoids stack too deep errors
       address _token0 = token0;
       address _token1 = token1;
-      require(to != _token0 && to != _token1, 'RoimaswapV2: INVALID_TO');
+      require(to != _token0 && to != _token1, 'BsgswapV2: INVALID_TO');
       if (amount0Out > 0) _safeTransfer(_token0, to, amount0Out); // optimistically transfer tokens
       if (amount1Out > 0) _safeTransfer(_token1, to, amount1Out); // optimistically transfer tokens
-      if (data.length > 0) IRoimaswapV2Callee(to).roimaswapV2Call(msg.sender, amount0Out, amount1Out, data);
+      if (data.length > 0) IBsgswapV2Callee(to).bsgswapV2Call(msg.sender, amount0Out, amount1Out, data);
       balance0 = IERC20(_token0).balanceOf(address(this));
       balance1 = IERC20(_token1).balanceOf(address(this));
     }
     uint256 amount0In = balance0 > _reserve0 - amount0Out ? balance0 - (_reserve0 - amount0Out) : 0;
     uint256 amount1In = balance1 > _reserve1 - amount1Out ? balance1 - (_reserve1 - amount1Out) : 0;
-    require(amount0In > 0 || amount1In > 0, 'RoimaswapV2: INSUFFICIENT_INPUT_AMOUNT');
+    require(amount0In > 0 || amount1In > 0, 'BsgswapV2: INSUFFICIENT_INPUT_AMOUNT');
     {
       // scope for reserve{0,1}Adjusted, avoids stack too deep errors
       uint256 balance0Adjusted = balance0.mul(1000).sub(amount0In.mul(3));
       uint256 balance1Adjusted = balance1.mul(1000).sub(amount1In.mul(3));
-      require(
-        balance0Adjusted.mul(balance1Adjusted) >= uint256(_reserve0).mul(_reserve1).mul(1000**2),
-        'RoimaswapV2: K'
-      );
+      require(balance0Adjusted.mul(balance1Adjusted) >= uint256(_reserve0).mul(_reserve1).mul(1000**2), 'BsgswapV2: K');
     }
 
     _update(balance0, balance1, _reserve0, _reserve1);
@@ -527,8 +524,8 @@ contract RoimaswapV2Pair is IRoimaswapV2Pair, RoimaswapV2ERC20 {
   }
 }
 
-contract RoimaswapV2Factory is IRoimaswapV2Factory {
-  bytes32 public constant INIT_CODE_PAIR_HASH = keccak256(abi.encodePacked(type(RoimaswapV2Pair).creationCode));
+contract BsgswapV2Factory is IBsgswapV2Factory {
+  bytes32 public constant INIT_CODE_PAIR_HASH = keccak256(abi.encodePacked(type(BsgswapV2Pair).creationCode));
   address public feeTo;
   address public feeToSetter;
 
@@ -546,16 +543,16 @@ contract RoimaswapV2Factory is IRoimaswapV2Factory {
   }
 
   function createPair(address tokenA, address tokenB) external returns (address pair) {
-    require(tokenA != tokenB, 'RoimaswapV2: IDENTICAL_ADDRESSES');
+    require(tokenA != tokenB, 'BsgswapV2: IDENTICAL_ADDRESSES');
     (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
-    require(token0 != address(0), 'RoimaswapV2: ZERO_ADDRESS');
-    require(getPair[token0][token1] == address(0), 'RoimaswapV2: PAIR_EXISTS'); // single check is sufficient
-    bytes memory bytecode = type(RoimaswapV2Pair).creationCode;
+    require(token0 != address(0), 'BsgswapV2: ZERO_ADDRESS');
+    require(getPair[token0][token1] == address(0), 'BsgswapV2: PAIR_EXISTS'); // single check is sufficient
+    bytes memory bytecode = type(BsgswapV2Pair).creationCode;
     bytes32 salt = keccak256(abi.encodePacked(token0, token1));
     assembly {
       pair := create2(0, add(bytecode, 32), mload(bytecode), salt)
     }
-    IRoimaswapV2Pair(pair).initialize(token0, token1);
+    IBsgswapV2Pair(pair).initialize(token0, token1);
     getPair[token0][token1] = pair;
     getPair[token1][token0] = pair; // populate mapping in the reverse direction
     allPairs.push(pair);
@@ -563,12 +560,12 @@ contract RoimaswapV2Factory is IRoimaswapV2Factory {
   }
 
   function setFeeTo(address _feeTo) external {
-    require(msg.sender == feeToSetter, 'RoimaswapV2: FORBIDDEN');
+    require(msg.sender == feeToSetter, 'BsgswapV2: FORBIDDEN');
     feeTo = _feeTo;
   }
 
   function setFeeToSetter(address _feeToSetter) external {
-    require(msg.sender == feeToSetter, 'RoimaswapV2: FORBIDDEN');
+    require(msg.sender == feeToSetter, 'BsgswapV2: FORBIDDEN');
     feeToSetter = _feeToSetter;
   }
 }

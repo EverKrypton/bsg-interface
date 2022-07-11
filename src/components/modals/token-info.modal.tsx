@@ -1,4 +1,4 @@
-import { Currency } from '@roimaswap/sdk';
+import { Currency } from '@babysquidgrow/sdk';
 import { Modal, ModalContent, ModalTitle } from '@mattjennings/react-modal';
 import DOMPurify from 'dompurify';
 import { Heading, Text } from 'theme-ui';

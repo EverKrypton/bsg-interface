@@ -1,5 +1,5 @@
 import { getContractInfo, getTokenInfo, getContractMarketData, getMarketData } from './fetch';
-import { Token } from '@roimaswap/sdk';
+import { Token } from '@babysquidgrow/sdk';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc.js';
 import { CoinHistory } from '../Model/coin';

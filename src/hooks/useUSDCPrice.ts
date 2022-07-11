@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Price, SupportedChainId, Token } from '@roimaswap/sdk';
+import { Currency, CurrencyAmount, Price, SupportedChainId, Token } from '@babysquidgrow/sdk';
 import { useMemo } from 'react';
 
 import { USDC } from '../constants/token';

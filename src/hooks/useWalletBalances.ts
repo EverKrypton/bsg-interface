@@ -1,5 +1,5 @@
 import { isAddress } from '@ethersproject/address';
-import { Currency, CurrencyAmount, JSBI } from '@roimaswap/sdk';
+import { Currency, CurrencyAmount, JSBI } from '@babysquidgrow/sdk';
 import { useMemo } from 'react';
 
 import { ExtendedNative } from '../constants/extended-native';

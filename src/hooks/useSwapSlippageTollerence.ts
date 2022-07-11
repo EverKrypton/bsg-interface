@@ -1,4 +1,4 @@
-import { Currency, Percent, Trade, TradeType } from '@roimaswap/sdk';
+import { Currency, Percent, Trade, TradeType } from '@babysquidgrow/sdk';
 import { useMemo } from 'react';
 
 import { useUserSlippageToleranceWithDefault } from './useUserSlippageToleranceWithDefault';

@@ -1,4 +1,4 @@
-import { JSBI, Percent } from '@roimaswap/sdk';
+import { JSBI, Percent } from '@babysquidgrow/sdk';
 import { Period } from '../Model/graph';
 
 export const NetworkContextName = 'NETWORK';

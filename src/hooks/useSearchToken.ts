@@ -1,5 +1,5 @@
 import { getAddress, isAddress } from '@ethersproject/address';
-import { Token } from '@roimaswap/sdk';
+import { Token } from '@babysquidgrow/sdk';
 import { TokenInfo } from '@manekiswap/token-lists';
 import { useCallback, useMemo } from 'react';
 

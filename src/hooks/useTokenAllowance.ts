@@ -1,4 +1,4 @@
-import { CurrencyAmount, Token } from '@roimaswap/sdk';
+import { CurrencyAmount, Token } from '@babysquidgrow/sdk';
 import { useMemo } from 'react';
 
 import { useTokenContract } from './useContract';
