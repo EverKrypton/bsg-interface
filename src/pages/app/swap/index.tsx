@@ -1,4 +1,5 @@
 import { JSBI } from '@babysquidgrow/sdk';
+import { mix } from '@theme-ui/color';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiArrowLeft, FiSettings } from 'react-icons/fi';
@@ -478,6 +479,9 @@ export default function SwapPage() {
           flexDirection: 'column',
           alignItems: 'center',
           backgroundColor: 'dark.400',
+          backgroundImage: `radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+      radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%)`,
           paddingY: 32,
           position: 'relative',
         }}

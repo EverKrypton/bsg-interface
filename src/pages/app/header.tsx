@@ -4,7 +4,7 @@ import { Divider, Flex, Image, Text } from 'theme-ui';
 
 // import { ReactComponent as LogoSVG } from '../../assets/images/1.svg';
 import { ReactComponent as LogoSVG } from '../../assets/images/logoblack.svg';
-// import { ReactComponent as LogoCircleSVG } from '../../assets/images/logocircle.svg';
+import BsgLogo from '../../assets/images/bsg.png';
 import { ReactComponent as LogoROMASVG } from '../../assets/images/ro.svg';
 import ConnectWalletButton from '../../components/buttons/connect-wallet.button';
 import NavMenuButton from '../../components/buttons/nav-menu.button';
@@ -44,32 +44,34 @@ export default function Header() {
             sx={{
               padding: 0,
               ':focus': { boxShadow: 'none' },
-              '>svg': {
-                height: 50,
-                width: 65,
-              },
-              ...mediaWidthTemplates.upToExtraSmall({
-                '>svg': {
-                  height: 50,
-                  width: 65,
-                },
-              }),
             }}
-            to={''}
+            to={'/'}
           >
             {/* {isUpToExtraSmall ? <LogoCircleSVG /> : <LogoSVG />} */}
-            <LogoROMASVG />
+            <Image
+              src={BsgLogo}
+              alt="BSG Logo"
+              sx={{
+                height: 46,
+                width: 320,
+                ...mediaWidthTemplates.upToExtraSmall({
+                  height: 30,
+                  width: 180,
+                }),
+              }}
+            />
+            {/* <LogoROMASVG /> */}
           </Link>
           {
-            <Text variant="caps101" sx={{ padding: 0 }}>
-              BSGSWAP
-            </Text>
+            // <Text variant="caps101" sx={{ padding: 0 }}>
+            //   BSGSWAP
+            // </Text>
           }
           {!isUpToExtraSmall && (
             <Flex
               sx={{
                 marginLeft: 12,
-                backgroundColor: 'blue.400',
+                backgroundColor: 'velvet.400',
                 borderRadius: 40,
                 paddingX: 10,
                 height: 40,
@@ -88,7 +90,7 @@ export default function Header() {
                   alignSelf: 'center',
                   // backgroundColor: matchedSwapRoute ? 'linear-gradient(0deg, #ff0600 -50%, #ffb400 100%)' : 'dark.200',
                   color: matchedSwapRoute ? 'dark.400' : 'white.400',
-                  backgroundColor: matchedSwapRoute ? 'mint.400' : 'dark.400',
+                  backgroundColor: matchedSwapRoute ? 'mint.600' : 'dark.400',
                   ':focus': { boxShadow: 'none', color: 'dark.400', backgroundColor: 'mint.400' },
                 }}
                 to={routes.swapNext}
@@ -107,7 +109,7 @@ export default function Header() {
                   alignContent: 'center',
                   alignSelf: 'center',
                   color: matchedPoolRoute ? 'dark.400' : 'white.400',
-                  backgroundColor: matchedPoolRoute ? 'mint.400' : 'dark.400',
+                  backgroundColor: matchedPoolRoute ? 'mint.600' : 'dark.400',
                   ':focus': { boxShadow: 'none', color: 'dark.400', backgroundColor: 'mint.400' },
                 }}
                 to={routes.pool}
@@ -125,7 +127,7 @@ export default function Header() {
                   alignContent: 'center',
                   alignSelf: 'center',
                   color: matchedChartRoute ? 'dark.400' : 'white.400',
-                  backgroundColor: matchedChartRoute ? 'mint.400' : 'dark.400',
+                  backgroundColor: matchedChartRoute ? 'mint.600' : 'dark.400',
                   ':focus': { boxShadow: 'none', color: 'dark.400', backgroundColor: 'mint.400' },
                 }}
                 to={routes.chart}
