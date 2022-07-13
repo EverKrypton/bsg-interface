@@ -105,7 +105,7 @@ export default function ChartPage() {
     <graphs.Provider>
       <Helmet>
         <title>Bsgswap | Analytics</title>
-        <link rel="canonical" href="https://manekiswap.com/#/app/chart" />
+        <link rel="canonical" href="https://bsgswap.com/#/app/chart" />
       </Helmet>
 
       <Updater />
