@@ -202,7 +202,7 @@ contract BsgswapV2ERC20 is IBsgswapV2ERC20 {
   using SafeMath for uint256;
 
   string public constant name = 'Bsgswap V2';
-  string public constant symbol = 'Rmai-V2';
+  string public constant symbol = 'Bsg-V2';
   uint8 public constant decimals = 18;
   uint256 public totalSupply;
   mapping(address => uint256) public balanceOf;

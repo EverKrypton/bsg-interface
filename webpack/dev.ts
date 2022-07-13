@@ -10,7 +10,7 @@ export default (merge as any)(commonConfig, {
     hot: true,
     host: '0.0.0.0',
     allowedHosts: 'all',
-    port: 8095,
+    port: 8092,
     historyApiFallback: true,
     client: {
       overlay: false,

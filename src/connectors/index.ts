@@ -49,6 +49,6 @@ export const walletconnect = new WalletConnectConnector({
 
 export const walletlink = new WalletLinkConnector({
   url: NETWORK_URLS[SupportedChainId.MAINNET],
-  appName: 'Roimaswap',
+  appName: 'Bsgswap',
   appLogoUrl: 'https://raw.githubusercontent.com/manekiswap/interface/master/src/assets/images/logo144x144.png',
 });

@@ -1,6 +1,7 @@
-import { ThemeUICSSObject, ThemeUIStyleObject } from "theme-ui";
+import { ThemeUICSSObject, ThemeUIStyleObject } from 'theme-ui';
 
 export const MEDIA_WIDTHS = {
+  uptoExtraExtraSmall: 425,
   upToExtraSmall: 785,
   upToSmall: 786,
   upToMedium: 1024,
@@ -16,8 +17,6 @@ export const mediaWidthTemplates = Object.keys(MEDIA_WIDTHS).reduce(
     return memo;
   },
   {} as {
-    [width in keyof typeof MEDIA_WIDTHS]: (
-      args: ThemeUICSSObject,
-    ) => ThemeUIStyleObject;
+    [width in keyof typeof MEDIA_WIDTHS]: (args: ThemeUICSSObject) => ThemeUIStyleObject;
   },
 );

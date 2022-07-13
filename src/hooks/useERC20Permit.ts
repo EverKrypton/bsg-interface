@@ -236,7 +236,7 @@ export function useERC20Permit(
 
 const REMOVE_LIQUIDITY_PERMIT_INFO: PermitInfo = {
   version: '2',
-  name: 'Roimaswap V2',
+  name: 'Bsgswap V2',
   type: PermitType.AMOUNT,
 };
 

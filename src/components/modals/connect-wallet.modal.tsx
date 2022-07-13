@@ -332,7 +332,7 @@ export default function ConnectWalletModal(props: Props) {
               <Text>By connecting a wallet, you agree to Roimaswap’s </Text>
               <a sx={{ fontWeight: 'medium', color: 'blue.400' }}>Terms of Service</a>
               <Text> and acknowledge that you have read and understand the </Text>
-              <a sx={{ fontWeight: 'medium', color: 'blue.400' }}>Roimaswap protocol disclaimer</a>.
+              <a sx={{ fontWeight: 'medium', color: 'blue.400' }}>Bsgswap protocol disclaimer</a>.
             </Text>
             <Text sx={{ fontWeight: 'medium', marginTop: 24, marginBottom: '8px', color: 'white.200' }}>
               Select wallet
@@ -388,10 +388,10 @@ export default function ConnectWalletModal(props: Props) {
         </ModalTitle>
         <ModalContent sx={{ flexDirection: 'column' }}>
           <Text>
-            <span>By connecting a wallet, you agree to Roimaswap's </span>
+            <span>By connecting a wallet, you agree to Bsgswap's </span>
             <a sx={{ fontWeight: 'medium', color: 'blue.400' }}>Terms of Service</a>
             <span> and acknowledge that you have read and understand the </span>
-            <a sx={{ fontWeight: 'medium', color: 'blue.400' }}>Roimaswap protocol disclaimer</a>.
+            <a sx={{ fontWeight: 'medium', color: 'blue.400' }}>Bsgswap protocol disclaimer</a>.
           </Text>
           <Text sx={{ fontWeight: 'medium', marginTop: 24, marginBottom: '8px', color: 'white.200' }}>
             Select wallet

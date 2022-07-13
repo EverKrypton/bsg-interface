@@ -142,7 +142,7 @@ export function swapErrorToUserReadableMessage(error: any): string {
     case 'RoimaswapV2: TRANSFER_FAILED':
       return `The output token cannot be transferred. There may be an issue with the output token.`;
     case 'RoimaswapV2: K':
-      return `The Roimaswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer.`;
+      return `The Bsgswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer.`;
     case 'Too little received':
     case 'Too much requested':
     case 'STF':
@@ -152,7 +152,7 @@ export function swapErrorToUserReadableMessage(error: any): string {
     default:
       if (reason?.indexOf('undefined is not an object') !== -1) {
         console.error(error, reason);
-        return `An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note fee on transfer and rebase tokens are incompatible with Roimaswap V3.`;
+        return `An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note fee on transfer and rebase tokens are incompatible with Bsgswap V3.`;
       }
       return `Unknown error${reason ? `: "${reason}"` : ''}. Try increasing your slippage tolerance.`;
   }

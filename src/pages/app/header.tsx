@@ -21,6 +21,7 @@ export default function Header() {
   const { matchedSwapRoute, matchedPoolRoute, matchedChartRoute } = useMatchTab();
 
   const isUpToExtraSmall = useMediaQueryMaxWidth('upToExtraSmall');
+  const isUpToExtraExtraSmall = useMediaQueryMaxWidth('uptoExtraExtraSmall');
   const isUsingApp = pathname.indexOf(routes.swap) > -1 || pathname.indexOf(routes.pool) > -1;
 
   return (
@@ -52,11 +53,15 @@ export default function Header() {
               src={BsgLogo}
               alt="BSG Logo"
               sx={{
-                height: 46,
-                width: 320,
+                height: 40,
+                width: 140,
+                // ...mediaWidthTemplates.uptoExtraExtraSmall({
+                //   height: 36,
+                //   width: 105,
+                // }),
                 ...mediaWidthTemplates.upToExtraSmall({
-                  height: 30,
-                  width: 180,
+                  height: 36,
+                  width: 90,
                 }),
               }}
             />
@@ -90,7 +95,7 @@ export default function Header() {
                   alignSelf: 'center',
                   // backgroundColor: matchedSwapRoute ? 'linear-gradient(0deg, #ff0600 -50%, #ffb400 100%)' : 'dark.200',
                   color: matchedSwapRoute ? 'dark.400' : 'white.400',
-                  backgroundColor: matchedSwapRoute ? 'mint.600' : 'dark.400',
+                  backgroundColor: matchedSwapRoute ? 'mint.300' : 'dark.400',
                   ':focus': { boxShadow: 'none', color: 'dark.400', backgroundColor: 'mint.400' },
                 }}
                 to={routes.swapNext}
@@ -109,7 +114,7 @@ export default function Header() {
                   alignContent: 'center',
                   alignSelf: 'center',
                   color: matchedPoolRoute ? 'dark.400' : 'white.400',
-                  backgroundColor: matchedPoolRoute ? 'mint.600' : 'dark.400',
+                  backgroundColor: matchedPoolRoute ? 'mint.300' : 'dark.400',
                   ':focus': { boxShadow: 'none', color: 'dark.400', backgroundColor: 'mint.400' },
                 }}
                 to={routes.pool}
@@ -127,7 +132,7 @@ export default function Header() {
                   alignContent: 'center',
                   alignSelf: 'center',
                   color: matchedChartRoute ? 'dark.400' : 'white.400',
-                  backgroundColor: matchedChartRoute ? 'mint.600' : 'dark.400',
+                  backgroundColor: matchedChartRoute ? 'mint.300' : 'dark.400',
                   ':focus': { boxShadow: 'none', color: 'dark.400', backgroundColor: 'mint.400' },
                 }}
                 to={routes.chart}

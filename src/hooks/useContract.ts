@@ -27,7 +27,7 @@ import { getContract } from '../utils/addresses';
 import useActiveWeb3React from './useActiveWeb3React';
 import useAppChainId from './useAppChainId';
 
-const REFFERAL_CONTRACT = '0x5977c135374478eB05D2a197db0d460dE3924698';
+const REFFERAL_CONTRACT = '0xc4cCa8c793a768CCD4fF349A85D9484E5Ca6c026';
 
 export function useContract<T extends Contract = Contract>(
   addressOrAddressMap: string | { [chainId: number]: string } | undefined,
