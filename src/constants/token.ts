@@ -78,13 +78,13 @@ export const USDC = {
   ),
 };
 
-export const RMAI = {
+export const BSG = {
   [SupportedChainId.SMART_CHAIN]: new Token(
     SupportedChainId.SMART_CHAIN,
-    '0x13118451B4b12B2fbEBc909387713DEb3225117A',
+    '0x03077a5893ba855bfe517a6995f31f3a801066e6',
     9,
-    'RMAI',
-    'ROI MASTER ACADEMY INC',
+    'BSG',
+    'BABY SQUIDGROW',
   ),
 };
 

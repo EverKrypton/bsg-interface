@@ -1,4 +1,4 @@
-const ROIMASWAP_LIST = 'https://raw.githubusercontent.com/kmTeamdex/roima-sdk/main/tokenlist.json';
+const BSGSWAP_LIST = 'https://raw.githubusercontent.com/kmTeamdex/roima-sdk/main/tokenlist.json';
 // 'https://unpkg.com/@bscswap/default-token-list@latest'
 
 const COMPOUND_LIST = 'https://raw.githubusercontent.com/compound-finance/token-list/master/compound.tokenlist.json';
@@ -10,9 +10,9 @@ export const UNSUPPORTED_LIST_URLS: string[] = [BA_LIST];
 // lower index == higher priority for token import
 export const DEFAULT_LIST_OF_LISTS: string[] = [
   // COMPOUND_LIST,
-  ROIMASWAP_LIST,
+  BSGSWAP_LIST,
   ...UNSUPPORTED_LIST_URLS, // need to load unsupported tokens as well
 ];
 
 // default lists to be 'active' aka searched across
-export const DEFAULT_ACTIVE_LIST_URLS: string[] = [ROIMASWAP_LIST];
+export const DEFAULT_ACTIVE_LIST_URLS: string[] = [BSGSWAP_LIST];

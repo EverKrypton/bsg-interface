@@ -1,7 +1,7 @@
 import { SupportedChainId, Token } from '@babysquidgrow/sdk';
 
 import { ExtendedNative, WETH9_EXTENDED, WMATIC_EXTENDED } from './extended-native';
-import { DAI, USDC, USDT, WBTC, RMAI } from './token';
+import { DAI, USDC, USDT, WBTC, BSG } from './token';
 
 type ChainTokenList = {
   readonly [chainId: number]: Token[];
@@ -80,7 +80,7 @@ export const COMMON_BASES = {
   [SupportedChainId.KOVAN]: [ExtendedNative.onChain(SupportedChainId.KOVAN), WETH9_EXTENDED[SupportedChainId.KOVAN]],
   [SupportedChainId.SMART_CHAIN]: [
     ExtendedNative.onChain(SupportedChainId.SMART_CHAIN),
-    RMAI[SupportedChainId.SMART_CHAIN],
+    BSG[SupportedChainId.SMART_CHAIN],
     DAI[SupportedChainId.SMART_CHAIN],
     USDC[SupportedChainId.SMART_CHAIN],
     USDT[SupportedChainId.SMART_CHAIN],
