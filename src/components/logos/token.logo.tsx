@@ -1,7 +1,7 @@
 import { Currency, SupportedChainId } from '@babysquidgrow/sdk';
 
 import EthereumLogo from '../../assets/images/tokens/ethereum-logo.png';
-import BsgPng from '../../assets/images/tokens/bsg-logo.png';
+import BsgPng from '../../assets/images/tokens/new-bsg.png';
 import BnbLogo from '../../assets/images/tokens/bnb-logo.png';
 import useAppChainId from '../../hooks/useAppChainId';
 import useDefaultLogoURI from '../../hooks/useDefaultLogoURIs';
