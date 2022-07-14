@@ -60,8 +60,8 @@ export default function Header() {
                 //   width: 105,
                 // }),
                 ...mediaWidthTemplates.upToExtraSmall({
-                  height: 36,
-                  width: 90,
+                  height: 30,
+                  width: 95,
                 }),
               }}
             />
