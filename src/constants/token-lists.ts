@@ -1,4 +1,4 @@
-const BSGSWAP_LIST = 'https://raw.githubusercontent.com/kmTeamdex/roima-sdk/main/tokenlist.json';
+const BSGSWAP_LIST = 'https://raw.githubusercontent.com/EverKrypton/bsg-sdk/main/tokenlist.json';
 // 'https://unpkg.com/@bscswap/default-token-list@latest'
 
 const COMPOUND_LIST = 'https://raw.githubusercontent.com/compound-finance/token-list/master/compound.tokenlist.json';

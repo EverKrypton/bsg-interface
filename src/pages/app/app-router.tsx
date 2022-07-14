@@ -50,7 +50,7 @@ export default function AppRouter() {
     <>
       <Helmet>
         <title> Bsgswap | App</title>
-        <link rel="canonical" href="https://wingswap.com/#/app" />
+        <link rel="canonical" href="https://bsgswap.com/#/app" />
       </Helmet>
 
       <Updaters enabled={matchChartRoute === null} />

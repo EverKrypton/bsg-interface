@@ -329,7 +329,7 @@ export default function ConnectWalletModal(props: Props) {
           </ModalTitle>
           <ModalContent sx={{ flexDirection: 'column' }}>
             <Text>
-              <Text>By connecting a wallet, you agree to Roimaswap’s </Text>
+              <Text>By connecting a wallet, you agree to Bsgswap’s </Text>
               <a sx={{ fontWeight: 'medium', color: 'blue.400' }}>Terms of Service</a>
               <Text> and acknowledge that you have read and understand the </Text>
               <a sx={{ fontWeight: 'medium', color: 'blue.400' }}>Bsgswap protocol disclaimer</a>.
