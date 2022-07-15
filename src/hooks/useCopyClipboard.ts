@@ -6,6 +6,7 @@ export default function useCopyClipboard(timeout = 500): [boolean, (toCopy: stri
 
   const staticCopy = useCallback((text) => {
     const didCopy = copy(text);
+
     setIsCopied(didCopy);
   }, []);
 

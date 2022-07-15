@@ -56,7 +56,7 @@ const getReffer = (address?: string | null) => {
 export default function SwapPage() {
   const navigate = useNavigate();
   const { t } = useTranslation(['error']);
-  const [isCopied, setCopied] = useCopyClipboard();
+  const [isCopied, setCopied] = useCopyClipboard(100);
   const [activeTransactionSettings, toggleTransactionSettings] = useToggle(false);
   const [activeReviewSwap, toggleReviewSwap] = useToggle(false);
   const [activeTransactionConfirm, toggleTransactionConfirm] = useToggle(false);
@@ -143,6 +143,8 @@ export default function SwapPage() {
   );
 
   const isValid = !swapInputError;
+
+  const referLink = getReffer(account);
 
   useEffect(() => {
     if (approvalState === ApprovalState.PENDING) {
@@ -414,7 +416,9 @@ export default function SwapPage() {
             <Button
               variant="buttons.small-link"
               sx={{ textDecoration: 'none', marginRight: 16 }}
-              onClick={() => setCopied(getReffer(account))}
+              onClick={() => {
+                setCopied(referLink);
+              }}
             >
               <CopySVG sx={{ marginRight: '8px' }} />
               {isCopied ? 'Copied' : 'Copy Referral Link'}
@@ -432,6 +436,7 @@ export default function SwapPage() {
   }, [
     _onReset,
     account,
+    setCopied,
     allowedSlippage,
     appChainId,
     approvalState,
@@ -451,6 +456,7 @@ export default function SwapPage() {
     parsedQs.fromRoute,
     priceImpactSeverity,
     routeNotFound,
+
     showApproveFlow,
     showWrap,
     singleHopOnly,

@@ -1011,10 +1011,10 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
-"@babysquidgrow/sdk@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@babysquidgrow/sdk/-/sdk-2.0.0.tgz#f9da4ac18877d8eaa4acafd3eabdec8b216e4d1d"
-  integrity sha512-7VPwsdRtEXwLXUMWBO4LffYwLBJ4E6bjL0ubH96hr8vlggKWrqh+XxH0JUWNX4xfXkj+DQPjKNmMGvKcPRwqjg==
+"@babysquidgrow/sdk@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@babysquidgrow/sdk/-/sdk-2.1.0.tgz#32b0dd5a36945661e0f8f5116a78c7edef402184"
+  integrity sha512-oh3fV+rKgSEaeCBarCZqOIdK0wrj0yLYcvznxhe9vo8yIcMgt5ro9JtzVskxnlssY2vt1TYUbeI1wkmTK0g+mg==
   dependencies:
     big.js "6.1.1"
     decimal.js-light "2.5.1"

@@ -287,9 +287,12 @@ export default function ConnectWalletModal(props: Props) {
               <Button
                 variant="buttons.small-link"
                 sx={{ textDecoration: 'none', marginRight: 16 }}
-                onClick={() => setCopied(account || '')}
+                onClick={() => {
+                  setCopied(account || '');
+                }}
               >
                 <CopySVG sx={{ marginRight: '8px' }} />
+
                 {isCopied ? 'Copied' : 'Copy address'}
               </Button>
               <Link
