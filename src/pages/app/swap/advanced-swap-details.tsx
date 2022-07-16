@@ -1,6 +1,7 @@
 import { Currency, Percent, Trade, TradeType } from '@babysquidgrow/sdk';
-import { useMemo } from 'react';
+import { useMemo, Fragment } from 'react';
 import { Flex, Text } from 'theme-ui';
+import { ReactComponent as ArrowSvg } from '../../../assets/images/icons/rightarrow.svg';
 
 import { computeRealizedLPFeePercent, warningSeverity } from '../../../functions/prices';
 
@@ -31,7 +32,7 @@ interface AdvancedSwapDetailsProps {
 export default function AdvancedSwapDetails({ trade, allowedSlippage }: AdvancedSwapDetailsProps) {
   const { realizedLPFee, priceImpact } = useMemo(() => {
     if (!trade) return { realizedLPFee: undefined, priceImpact: undefined };
-
+    console.log(trade.route);
     const realizedLpFeePercent = computeRealizedLPFeePercent(trade);
     const realizedLPFee = trade.inputAmount.multiply(realizedLpFeePercent);
     const priceImpact = trade.priceImpact.subtract(realizedLpFeePercent);
@@ -78,6 +79,26 @@ export default function AdvancedSwapDetails({ trade, allowedSlippage }: Advanced
             ? `${trade.minimumAmountOut(allowedSlippage).toSignificant(6)} ${trade.outputAmount.currency.symbol}`
             : `${trade.maximumAmountIn(allowedSlippage).toSignificant(6)} ${trade.inputAmount.currency.symbol}`}
         </Text>
+      </Flex>
+      <Flex sx={{ alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+        <Text variant="caps100" sx={{ color: 'dark.500', marginRight: '16px' }}>
+          Route
+        </Text>
+        {trade.route.path.map((token, i, path) => {
+          const isLastItem: boolean = i === path.length - 1;
+          const currency = token;
+          return (
+            // eslint-disable-next-line react/no-array-index-key
+            <Fragment key={i}>
+              <Flex sx={{ alignItems: 'end' }}>
+                <Text variant="caps100" sx={{ color: 'dark.500' }}>
+                  {currency.symbol}
+                </Text>
+              </Flex>
+              {!isLastItem && <ArrowSvg sx={{ width: '8px' }} />}
+            </Fragment>
+          );
+        })}
       </Flex>
     </Flex>
   );

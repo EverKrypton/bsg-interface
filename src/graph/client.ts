@@ -1,5 +1,9 @@
-import { ApolloClient, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
-import { SupportedChainId } from '@babysquidgrow/sdk';
+import {
+  ApolloClient,
+  InMemoryCache,
+  NormalizedCacheObject,
+} from "@apollo/client";
+import { SupportedChainId } from "@babysquidgrow/sdk";
 
 export default function getClients(chainId?: number): {
   blockClient?: ApolloClient<NormalizedCacheObject>;
@@ -9,12 +13,14 @@ export default function getClients(chainId?: number): {
   if (chainId === SupportedChainId.RINKEBY) {
     return {
       blockClient: new ApolloClient({
-        uri: 'https://api.thegraph.com/subgraphs/name/blocklytics/rinkeby-blocks',
+        uri:
+          "https://api.thegraph.com/subgraphs/name/blocklytics/rinkeby-blocks",
         cache: new InMemoryCache(),
         queryDeduplication: true,
       }),
       dataClient: new ApolloClient({
-        uri: 'https://api.thegraph.com/subgraphs/name/croccifixio-maneki/manekirinkeby',
+        uri:
+          "https://api.thegraph.com/subgraphs/name/croccifixio-maneki/manekirinkeby",
         cache: new InMemoryCache(),
         queryDeduplication: true,
       }),
@@ -22,12 +28,14 @@ export default function getClients(chainId?: number): {
   } else if (chainId === SupportedChainId.SMART_CHAIN) {
     return {
       blockClient: new ApolloClient({
-        uri: 'https://api.thegraph.com/subgraphs/name/blockartist/cheeseblock',
+        uri: "https://api.thegraph.com/subgraphs/name/blockartist/cheeseblock",
         cache: new InMemoryCache(),
         queryDeduplication: true,
       }),
       dataClient: new ApolloClient({
-        uri: 'https://api.thegraph.com/subgraphs/name/slowworks/wingswap',
+        // uri: 'https://api.thegraph.com/subgraphs/name/slowworks/wingswap',
+        uri:
+          "https://bsc.streamingfast.io/subgraphs/name/pancakeswap/exchange-v2",
         cache: new InMemoryCache(),
         queryDeduplication: true,
       }),
