@@ -102,15 +102,11 @@ export default function CurrencyAmountInput(props: Props) {
               fontSize: 0,
               color: 'white.200',
               ...mediaWidthTemplates.upToExtraSmall({
-                display: 'none',
+                // display: ,
               }),
             }}
-          >{`~$ ${
-            fiatValue
-              ? fiatValue?.toSignificant(6, {
-                  groupSeparator: ',',
-                })
-              : '0.00'
+          >{`Bal: ${
+            parseFloat(balance?.toExact() || '0') === 0 ? 0 : formatAmount(parseFloat(balance?.toExact() || '0'))
           }`}</Text>
         </Flex>
       </Flex>
