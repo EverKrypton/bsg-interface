@@ -91,7 +91,9 @@ export default function CurrencyAmountInput(props: Props) {
             onFocus={_onFocus}
             {...rest}
           />
-          {/* <Text sx={{ marginTop: 50 }}>{`Balance: ${
+          {/* <Text
+            sx={{ marginLeft: 'auto', fontSize: 0, fontWeight: 'medium', lineHeight: 0, color: 'white.300' }}
+          >{`Balance: ${
             parseFloat(balance?.toExact() || '0') === 0 ? 0 : formatAmount(parseFloat(balance?.toExact() || '0'))
           } ${token?.symbol}`}</Text> */}
 

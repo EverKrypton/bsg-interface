@@ -2,7 +2,7 @@ import { Modal, ModalContent, ModalTitle } from '@mattjennings/react-modal';
 import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiXCircle } from 'react-icons/fi';
-import { Button, Flex } from 'theme-ui';
+import { Button, Flex, Link as ELink } from 'theme-ui';
 
 import useMatchTab from '../../hooks/useMatchTab';
 import routes from '../../routes';
@@ -94,7 +94,7 @@ export default function NavMenuModal(props: Props) {
           >
             {t('app:pool')}
           </Link>
-          <Link
+          <ELink
             variant="buttons.ghost"
             sx={{
               fontSize: 3,
@@ -103,13 +103,13 @@ export default function NavMenuModal(props: Props) {
               alignItems: 'center',
               color: matchedChartRoute ? 'velvet.300' : 'white.300',
             }}
-            to={routes.chart}
+            href={routes.stake}
             onClick={() => {
               _onClose();
             }}
           >
-            {t('app:chart')}
-          </Link>
+            {t('app:stake')}
+          </ELink>
         </Flex>
       </ModalContent>
     </Modal>

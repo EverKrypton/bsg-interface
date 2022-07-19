@@ -121,14 +121,14 @@ export default function AppRouter() {
                   </Suspense>
                 }
               />
-              <Route
+              {/* <Route
                 path={'/chart/*'}
                 element={
                   <Suspense fallback={<Loading />}>
                     <ChartPage />
                   </Suspense>
                 }
-              />
+              /> */}
               <Route path="*" element={<Navigate to={{ pathname: routes.swapNext }} replace={true} />} />
             </Routes>
           </AppCtx.Provider>

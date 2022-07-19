@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
-import { Divider, Flex, Image, Text } from 'theme-ui';
+import { Divider, Flex, Image, Text, Link as ELink } from 'theme-ui';
 
 // import { ReactComponent as LogoSVG } from '../../assets/images/1.svg';
 import { ReactComponent as LogoSVG } from '../../assets/images/logoblack.svg';
-import BsgLogo from '../../assets/images/bsgswap.png';
+import BsgLogo from '../../assets/images/bsg.png';
 import { ReactComponent as LogoROMASVG } from '../../assets/images/ro.svg';
 import ConnectWalletButton from '../../components/buttons/connect-wallet.button';
 import NavMenuButton from '../../components/buttons/nav-menu.button';
@@ -121,7 +121,7 @@ export default function Header() {
               >
                 <Text sx={{ fontFamily: 'monospace' }}>{t('app:pool')}</Text>
               </Link>
-              <Link
+              <ELink
                 variant="buttons.ghost"
                 sx={{
                   textDecoration: 'none',
@@ -135,10 +135,10 @@ export default function Header() {
                   backgroundColor: matchedChartRoute ? 'mint.300' : 'dark.400',
                   ':focus': { boxShadow: 'none', color: 'dark.400', backgroundColor: 'mint.400' },
                 }}
-                to={routes.chart}
+                href={routes.stake}
               >
-                <Text sx={{ fontFamily: 'monospace' }}>{t('app:chart')}</Text>
-              </Link>
+                <Text sx={{ fontFamily: 'monospace' }}>{t('app:stake')}</Text>
+              </ELink>
             </Flex>
           )}
         </Flex>

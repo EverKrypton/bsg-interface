@@ -17,12 +17,14 @@ const routes = {
   "pool-add": "/app/pool/add",
   "pool-remove": "/app/pool/remove",
 
-  chart: "/app/chart",
+  chart: "/app/",
   "chart-overview": "/app/chart/overview",
   "chart-pools": "/app/chart/pools",
   "chart-tokens": "/app/chart/tokens",
   "chart-token": "/app/chart/token/:address",
   "chart-pool": "/app/chart/pool/:address",
+
+  stake: "https://www.babysquidgrow.com/stake",
 };
 
 export default routes;
