@@ -32,7 +32,6 @@ interface AdvancedSwapDetailsProps {
 export default function AdvancedSwapDetails({ trade, allowedSlippage }: AdvancedSwapDetailsProps) {
   const { realizedLPFee, priceImpact } = useMemo(() => {
     if (!trade) return { realizedLPFee: undefined, priceImpact: undefined };
-    console.log(trade.route);
     const realizedLpFeePercent = computeRealizedLPFeePercent(trade);
     const realizedLPFee = trade.inputAmount.multiply(realizedLpFeePercent);
     const priceImpact = trade.priceImpact.subtract(realizedLpFeePercent);

@@ -4,7 +4,7 @@ import { Divider, Flex, Image, Text } from 'theme-ui';
 
 // import { ReactComponent as LogoSVG } from '../../assets/images/1.svg';
 import { ReactComponent as LogoSVG } from '../../assets/images/logoblack.svg';
-import BsgLogo from '../../assets/images/bsg.png';
+import BsgLogo from '../../assets/images/bsgswap.png';
 import { ReactComponent as LogoROMASVG } from '../../assets/images/ro.svg';
 import ConnectWalletButton from '../../components/buttons/connect-wallet.button';
 import NavMenuButton from '../../components/buttons/nav-menu.button';

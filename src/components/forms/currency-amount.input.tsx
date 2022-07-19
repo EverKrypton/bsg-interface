@@ -1,6 +1,7 @@
-import { CurrencyAmount, Token } from '@babysquidgrow/sdk';
+import { Currency, CurrencyAmount, Token } from '@babysquidgrow/sdk';
 import { ChangeEvent, FocusEvent, useCallback } from 'react';
 import { useMemo, useState } from 'react';
+import { formatAmount } from '../../utils/numbers';
 import { Flex, Input, InputProps, Label, Text } from 'theme-ui';
 
 import { mediaWidthTemplates } from '../../constants/media';
@@ -12,14 +13,16 @@ const inputRegex = RegExp(`^\\d*(?:\\\\[.])?\\d*$`); // match escaped "." charac
 interface Props extends Omit<InputProps, 'ref' | 'sx' | 'onChange'> {
   label?: string;
   error?: string;
+  token?: Currency;
   fiatValue?: CurrencyAmount<Token>;
+  balance?: CurrencyAmount<Currency>;
   onUserInput: (input: string) => void;
 }
 
 export default function CurrencyAmountInput(props: Props) {
-  const { className, label, error, fiatValue, onUserInput, id, disabled, onBlur, onFocus, ...rest } = props;
+  const { className, label, error, fiatValue, token, onUserInput, balance, id, disabled, onBlur, onFocus, ...rest } =
+    props;
   const [focused, setFocused] = useState(false);
-
   const enforcer = useCallback(
     (nextUserInput: string) => {
       if (nextUserInput === '' || inputRegex.test(escapeRegExp(nextUserInput))) {
@@ -77,6 +80,7 @@ export default function CurrencyAmountInput(props: Props) {
     >
       <Flex variant="styles.form-input" className={inputClassName}>
         {label && <Label htmlFor={id}>{label}</Label>}
+
         <Flex className="input-wrapper" sx={{ flex: 1, flexDirection: 'row', alignItems: 'center', paddingRight: 12 }}>
           <Input
             id={id}
@@ -87,6 +91,10 @@ export default function CurrencyAmountInput(props: Props) {
             onFocus={_onFocus}
             {...rest}
           />
+          {/* <Text sx={{ marginTop: 50 }}>{`Balance: ${
+            parseFloat(balance?.toExact() || '0') === 0 ? 0 : formatAmount(parseFloat(balance?.toExact() || '0'))
+          } ${token?.symbol}`}</Text> */}
+
           <Text
             sx={{
               fontSize: 0,

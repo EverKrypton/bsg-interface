@@ -296,12 +296,16 @@ export default function SwapPage() {
               sx={{ marginBottom: 12, ...mediaWidthTemplates.upToExtraSmall({ marginBottom: 0, marginRight: 16 }) }}
               label="Amount"
               value={formattedAmounts.INPUT}
+              token={currencyA}
+              balance={currencyBalances?.INPUT}
               fiatValue={fiatValueInput ?? undefined}
               onUserInput={updateCurrencyAValue}
             />
             <CurrencyAmountInput
               disabled={!!!currencyB}
               label="Amount"
+              token={currencyB}
+              balance={currencyBalances?.OUTPUT}
               value={formattedAmounts.OUTPUT}
               fiatValue={fiatValueOutput ?? undefined}
               onUserInput={updateCurrencyBValue}
